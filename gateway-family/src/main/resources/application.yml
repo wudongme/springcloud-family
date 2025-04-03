@@ -1,0 +1,43 @@
+server:
+  port: 8089  # Gateway service runs on port 8080
+
+logging:
+  level:
+    com.alibaba.nacos: DEBUG
+    com.alibaba.cloud.nacos.registry: TRACE
+spring:
+  application:
+    name: gateway-service  # Name of this gateway service
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 172.16.2.100:8848  # Nacos server address
+        username: nacos
+        password: nacos
+        namespace: public
+        ip: 10.0.10.56
+        ephemeral: true
+
+#    gateway:
+#      discovery:
+#        locator:
+#          enabled: true  # Enable service discovery through Nacos
+#          lower-case-service-id: true
+#      routes:
+#        - id: user-service
+#          uri: lb://user-service  # Load balancing with Nacos service discovery
+#          predicates:
+#            - Path=/user/**
+#          filters:
+#            - StripPrefix=1  # Remove /user from the path
+#
+#        - id: order-service
+#          uri: lb://order-service
+#          predicates:
+#            - Path=/order/**
+#
+#management:
+#  endpoints:
+#    web:
+#      exposure:
+#        include: '*'
