@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>家庭管理系统</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>家庭管理系统</h1>
+        <nav>
+            <button onclick="loadMedical()">医疗记录</button>
+            <button onclick="loadBodyCheck()">身体检查记录</button>
+            <button onclick="loadDynamicForm()">动态表单检查记录</button>
+            <button onclick="loadAccounting()">家庭账目</button>
+        </nav>
+        <div id="content"></div>
+    </div>
+    <script src="app.js"></script>
+
+    <!-- 新增医疗记录模态框 -->
+    <div id="medicalModal" class="modal">
+        <div class="modal-content">
+            <!-- 在模态框的关闭按钮上绑定关闭函数 -->
+            <span class="close" onclick="closeModal()">&times;</span>
+            <h3>就诊记录详情</h3>
+            <form id="medicalForm" onsubmit="saveMedical(event)">
+                <input type="hidden" id="recordId">
+                
+                <div class="form-group">
+                    <label>就诊人：</label>
+                    <input type="text" id="familyMember" required>
+                </div>
+                
+                <div class="form-group">
+                    <label>就诊日期：</label>
+                    <input type="date" id="recordDate" required>
+                </div>
+                
+                <div class="form-group">
+                    <label>主要诊断：</label>
+                    <input type="text" id="diagnosis" required>
+                </div>
+                
+                <div class="form-group">
+                    <label>检查项目：</label>
+                    <div id="examItems">
+                        <div class="exam-item">
+                            <input type="text" placeholder="项目名称">
+                            <input type="text" placeholder="指标数值">
+                            <button type="button" onclick="addExamItem(this)">+</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label>检查报告：</label>
+                    <textarea id="report" rows="4"></textarea>
+                </div>
+                
+                <button type="submit">保存记录</button>
+                <button type="button" onclick="deleteMedical()" id="deleteBtn" style="display:none;">删除记录</button>
+            </form>
+        </div>
+    </div>
+
+    <div id="bodyCheckModal" class="modal">
+        <div class="modal-content">
+            <!-- 在模态框的关闭按钮上绑定关闭函数 -->
+            <span class="close" onclick="closeBodyCheckModal()">&times;</span>
+            <h3>就诊记录详情</h3>
+            <form id="bodyCheckForm" onsubmit="saveBodyCheck(event)">
+                <input type="hidden" id="checkRecordId">
+
+                <div class="form-group">
+                    <label>就诊人：</label>
+                    <input type="text" id="checker" required>
+                </div>
+
+                <div class="form-group">
+                    <label>检查医院：</label>
+                    <input type="text" id="hospitalName" required>
+                </div>
+
+                <div class="form-group">
+                    <label>检查项目：</label>
+                    <input type="text" id="checkProject" required>
+                </div>
+
+                <div class="form-group">
+                    <label>检查日期：</label>
+                    <input type="date" id="checkDate" required>
+                </div>
+
+                <div class="form-group">
+                    <label>是否正常：</label>
+                    <select id="boolean-select">
+                        <option value="true">正常</option>
+                        <option value="false">异常</option>
+                    </select>
+                </div>
+
+
+
+                <button type="submit">保存记录</button>
+                <button type="button" onclick="deleteBodyCheck()" id="deleteBodyCheckBtn" style="display:none;">删除记录</button>
+            </form>
+        </div>
+    </div>
+
+    <div id="dynamicModal" class="modal">
+        <div class="modal-content">
+            <!-- 在模态框的关闭按钮上绑定关闭函数 -->
+            <!--<span class="close" onclick="closeBodyCheckModal()">&times;</span>-->
+            <h3>动态记录详情</h3>
+            <form id="dynamicForm" onsubmit="savaDynamicForm(event)">
+                <div class="form-group">
+                    <label>检查项目：</label>
+                    <div id="dExamItems">
+                        <div class="exam-item">
+                            <input type="text" placeholder="项目名称">
+                            <input type="text" placeholder="指标数值">
+                            <button type="button" onclick="addExamItem(this)">+</button>
+                        </div>
+                    </div>
+                </div>
+
+
+                <!--<button type="submit">保存记录</button>
+                <button type="button" onclick="deleteBodyCheck()" id="deleteBodyCheckBtn" style="display:none;">删除记录</button>-->
+            </form>
+        </div>
+    </div>
+
+
+</body>
+</html>
